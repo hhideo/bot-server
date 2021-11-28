@@ -1,0 +1,27 @@
+{
+  "name": "bot-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hhideo/bot-server.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hhideo/bot-server/issues"
+  },
+  "homepage": "https://github.com/hhideo/bot-server#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "next": "^12.0.4",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "ws": "^8.3.0"
+  }
+}
