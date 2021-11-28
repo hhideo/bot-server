@@ -8,7 +8,6 @@ async function telegramHook(request, response) {
     }
     fetch(telegramUrl + '/sendMessage', reqOptions);
 
-    console.log(request);
     response.send();
 }
 
