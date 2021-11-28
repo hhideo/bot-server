@@ -1,5 +1,5 @@
 async function telegramHook(request, response) {
-    const telegramUrl = 'https://api.telegram.org/bot2111976642:AAFdHFqYslHSUbv4t6utlh95dsgjb6Lvd6c'
+    const telegramUrl = `https://api.telegram.org/bot${process.env.TELEGRAM_BOT_TOKEN}`
 
     const reqOptions = {
         method: 'POST',
