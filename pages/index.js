@@ -1,42 +1,43 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+//import WebSocket from 'ws';
+//const WebSocket = require('ws');
 
-function Home(props) {
+function Home() {
     return (
         <div>
             <h1>Home Page</h1>
             <div>
-                <p>{props.price}</p>
-                <p>BTCBRL</p>
-                <Price />
+                <h2>BTCBRL</h2>
+                <MarketData />
             </div>
         </div>
     )
 }
 
-function Price() {
+function MarketData() {
     const [lastPrice, setLastPrice] = useState(0);
+    const [serverTime, setServerTime] = useState('');
 
-    function getPrice() {
-        setLastPrice(lastPrice + 1);
-    }
+    useEffect(() => {
+        const binanceHook = new WebSocket('wss://stream.binance.com:9443/ws/btcbrl@kline_1m');
+
+        binanceHook.addEventListener('ping', () => {
+            binanceHook.send();
+        })
+
+        binanceHook.onmessage = (e) => {
+            const candle = JSON.parse(e.data);
+            setLastPrice(candle.k.c);
+            setServerTime(new Date(candle.E).toLocaleString('pt-br'));
+        };
+    });
 
     return (
         <div>
+            <p>{serverTime}</p>
             <p>{lastPrice}</p>
-            <button onClick={getPrice}>Incremento</button>
         </div>
     )
-}
-
-export async function getStaticProps() {
-    const fetchPrice = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCBRL');
-    const fetchPriceJSON = await fetchPrice.json();
-
-    return {
-        props: {
-            price: fetchPriceJSON.price
-        }
-    }
 }
 
 export default Home;
